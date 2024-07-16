@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source helper_static.variables
+source constants.variables
 
 # generate build file
 #
