@@ -1,23 +1,16 @@
 #!/bin/bash
 
-scriptdir=`dirname $0`
+source helper_static.variables
 
-scriptdir=`pwd`
-sourcecodedir=$(builtin cd $scriptdir/..; pwd)
-
-VARIABLES_FILE=${sourcecodedir}/concert_data/demo_build_envs.variables
-
-TEMPLATE_PATH=./templates
-
-  # generate build file
-  #
-source ${VARIABLES_FILE}
+# generate build file
+#
 
 export TIMESTAMP_UTC=$(date -u "+%Y-%m-%dT%H:%M:%SZ")
+export CONCERT_APP_URN=${CONCERT_URN_PREFIX}:${APP_NAME}
 
 outfile_name="${APP_NAME}-app-definition.json"
   ###
   # upload build file
   ###
-echo "generation application json ${DATA_OUT_PATH}/${outfile_name} "
-envsubst < ${TEMPLATE_PATH}/template-app-definition.json > ${DATA_OUT_PATH}/${outfile_name} 
+echo "generation application json ${OUTPUTDIR}/${outfile_name} "
+envsubst < ${TEMPLATE_PATH}/template-app-definition.json > ${OUTPUTDIR}/${outfile_name} 
