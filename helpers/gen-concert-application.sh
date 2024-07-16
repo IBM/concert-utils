@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source constants.variables
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${SCRIPT_DIR}/constants.variables
 
 # generate build file
 #
@@ -13,4 +14,4 @@ outfile_name="${APP_NAME}-app-definition.json"
   # upload build file
   ###
 echo "generation application json ${OUTPUTDIR}/${outfile_name} "
-envsubst < ${TEMPLATE_PATH}/template-app-definition.json > ${OUTPUTDIR}/${outfile_name} 
+envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/template-app-definition.json > ${OUTPUTDIR}/${outfile_name} 
