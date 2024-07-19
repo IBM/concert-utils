@@ -1,0 +1,5 @@
+####
+# Concert Toolkit Internal Variables
+####
+export CONCERT_URN_PREFIX=urn:ibm:appmgmt
+export TEMPLATE_PATH=../templates
