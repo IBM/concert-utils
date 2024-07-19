@@ -17,4 +17,4 @@ outfile_name="${COMPONENT_NAME}-${BUILD_NUMBER}-built-assets.json"
   ###
   echo "generating build inventory json ${OUTPUTDIR}/${outfile_name} "
 
-  envsubst < ${TEMPLATE_PATH}/template-build.json > ${OUTPUTDIR}/${outfile_name} 
+  envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/template-build.json > ${OUTPUTDIR}/${outfile_name} 
