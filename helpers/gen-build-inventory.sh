@@ -22,7 +22,7 @@ config_outfile_name="${COMPONENT_NAME}-${BUILD_NUMBER}-built-assets.json"
 
 #echo "generating build inventory config ${OUTPUTDIR}/${outfile_name} "
 CONCERT_DEF_CONFIG_FILE=${COMPONENT_NAME}-${BUILD_NUMBER}-config.yaml
-envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/template-build.json > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
+envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/build-sbom-values-sample.yaml.template > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
 
 
 TOOLKIT_COMMAND="build-sbom --build-config /toolkit-data/${CONCERT_DEF_CONFIG_FILE}"
