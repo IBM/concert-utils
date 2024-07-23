@@ -1,9 +1,9 @@
 concert:
   builds:
   - component_name: "${COMPONENT_NAME}"
-    output_file: "${COMPONENT_NAME}-build-inventory.json" # optional
+    output_file: "${COMPONENT_NAME}-build-inventory-${BUILD_NUMBER}.json" # optional
     app_name: "${APP_NAME}"
-    number: 1
+    number: "${BUILD_NUMBER}"
     version: "${APP_VERSION}"
     repository:
       name: "${REPO_NAME}"
