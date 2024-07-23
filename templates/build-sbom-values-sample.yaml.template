@@ -1,6 +1,6 @@
 concert:
   builds:
-  - component_name: ${COMPONENT_NAME}
+  - component_name: "${COMPONENT_NAME}"
     output_file: "${COMPONENT_NAME}-build-inventory.json" # optional
     app_name: "${APP_NAME}"
     number: 1
