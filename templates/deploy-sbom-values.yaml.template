@@ -1,0 +1,35 @@
+concert:
+  deployments:
+  - component_name: "${COMPONENT_NAME}"
+    output_file: "${COMPONENT_NAME}-build-inventory-${BUILD_NUMBER}.json" # optional
+    app_name: "${APP_NAME}"
+    number: "${BUILD_NUMBER}"
+    version: "${APP_VERSION}"
+    environment_target: "${ENVIRONMENT}"
+    repository:
+      name: "${DEPLOYMENT_REPO_NAME}"
+      url: "${DEPLOYMENT_REPO_URL}"
+      branch: "${DEPLOYMENT_REPO_BRANCH}"
+      commit_sha: "${DEPLOYMENT_REPO_COMMIT_SHA}"
+    build_inventory:
+      inventory_build_number: "${INVENTORY_BUILD}"
+    services:
+      - type: "app_access_point"
+        name: "${ACCESS_POINT_NAME}"
+        properties: 
+          base_url: "${APP_URL}"
+      - type: "k8_platform"
+        "name": "myk8"
+        properties:
+          platform: "${K8_PLATFORM}"
+          env_platform: "${ENV_PLATFORM}"
+          cluster_id: "${CLUSTER_ID}"
+          cluster_region: "${CLUSTER_REGION}"
+          cluster_name: "${CLUSTER_NAME}"
+          cluster_namespace: "${CLUSTER_NAMESPACE}"
+        dependson: 
+          - "${ACCESS_POINT_NAME}"
+
+    
+
+

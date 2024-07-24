@@ -3,8 +3,8 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${SCRIPT_DIR}/constants.variables
 
-  # generate build file
-  #
+# generate build file
+#
 
 export TIMESTAMP_UTC=$(date -u "+%Y-%m-%dT%H:%M:%SZ")
 export IMAGE_PURL=$IMAGE_NAME:$IMAGE_TAG
@@ -12,17 +12,10 @@ export IMAGE_URI="${IMAGE_PURL}@${IMAGE_DIGEST}"
 
 
 config_outfile_name="${COMPONENT_NAME}-${BUILD_NUMBER}-built-assets.json"
-###
-# upload build file
-###
-#echo "generating build inventory json ${OUTPUTDIR}/${outfile_name} "
-
-#envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/template-build.json > ${OUTPUTDIR}/${outfile_name} 
-
 
 #echo "generating build inventory config ${OUTPUTDIR}/${outfile_name} "
-CONCERT_DEF_CONFIG_FILE=${COMPONENT_NAME}-${BUILD_NUMBER}-config.yaml
-envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/build-sbom-values-sample.yaml.template > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
+CONCERT_DEF_CONFIG_FILE=buil-${COMPONENT_NAME}-${BUILD_NUMBER}-config.yaml
+envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/build-sbom-values.yaml.template > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
 
 
 TOOLKIT_COMMAND="build-sbom --build-config /toolkit-data/${CONCERT_DEF_CONFIG_FILE}"
