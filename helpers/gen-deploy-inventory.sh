@@ -16,6 +16,6 @@ config_outfile_name="${COMPONENT_NAME}-deploy-inventory-${BUILD_NUMBER}.json"
 CONCERT_DEF_CONFIG_FILE=deploy-${COMPONENT_NAME}-${BUILD_NUMBER}-config.yaml
 envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/deploy-sbom-values.yaml.template > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
 
-TOOLKIT_COMMAND="build-sbom --deploy-config /toolkit-data/${CONCERT_DEF_CONFIG_FILE}"
+TOOLKIT_COMMAND="deploy-sbom --deploy-config /toolkit-data/${CONCERT_DEF_CONFIG_FILE}"
 docker run -it --rm -u $(id -u):$(id -g) -v ${OUTPUTDIR}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
 
