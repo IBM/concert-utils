@@ -1,6 +1,28 @@
 #!/bin/bash
 ### WORK IN PROGESS
 
+usage() {
+    echo "Usage: $(basename $0) --file_name <output file name>"
+    exit 1
+}
+
+if [ "$#" -eq 0 ]; then
+    usage
+fi
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --file_name)
+            OUTPUT_FILENAME="$2"
+            [ -z "$FILES" ] && { echo "Error: --files <sbom-json-files-comma-separated> is required."; usage; }
+            shift 2
+            ;;
+        --help)
+            usage
+            ;;
+    esac
+done
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${SCRIPT_DIR}/constants.variables
 
