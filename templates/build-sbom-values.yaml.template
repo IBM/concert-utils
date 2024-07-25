@@ -1,0 +1,16 @@
+concert:
+  builds:
+  - component_name: "${COMPONENT_NAME}"
+    output_file: "${COMPONENT_NAME}-build-inventory-${BUILD_NUMBER}.json" # optional
+    app_name: "${APP_NAME}"
+    number: "${BUILD_NUMBER}"
+    version: "${APP_VERSION}"
+    repository:
+      name: "${REPO_NAME}"
+      url: "${REPO_URL}"
+      branch: "${REPO_BRANCH}"
+      commit_sha: "${REPO_COMMIT_SHA}"
+    image:
+      name: "${IMAGE_NAME}"
+      tag: "${IMAGE_TAG}"
+      digest: "${IMAGE_DIGEST}"
