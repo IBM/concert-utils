@@ -10,7 +10,7 @@ concert:
         email: "${CONTACT_EMAIL}"
         phone: "${CONCAT_PHONE}"
     properties:
-      application_criticality: "${}"
+      application_criticality: "${APPLICATION_CRITICALITY}"
     components:
     - component_name: "${COMPONENT_NAME}"
       repository:
