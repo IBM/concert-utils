@@ -1,0 +1,24 @@
+concert:
+  application:
+    output_file: "${OUTPUT_FILENAME}" # optional
+    app_name: "${APP_NAME}"
+    version: "${APP_VERSION}"
+    business:
+      name: "${BUSINESS_NAME}"
+      units:
+      - name: "${BUSINESS_UNIT_NAME}"
+        email: "${CONTACT_EMAIL}"
+        phone: "${CONCAT_PHONE}"
+    properties:
+      application_criticality: "${}"
+    components:
+    - component_name: "${COMPONENT_NAME}"
+      repository:
+        name: "${REPO_NAME}"
+        url: "${REPO_URL}"
+      image:
+        name: "${IMAGE_NAME}"
+    environment_targets:
+    - name: "${ENVIRONMANET_NAME_1}"
+    - name: "${ENVIRONMANET_NAME_2}"
+    - name: "${ENVIRONMANET_NAME_3}"
