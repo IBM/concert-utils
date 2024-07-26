@@ -1,7 +1,9 @@
 #!/bin/bash
 
+
 usage() {
-    echo "Usage: $(basename $0) --file_name <file name for> --cdxgen-args (cdxgen parameters)"
+    echo "Usage: $(basename $0) --outputfile <filename for the generated json>"
+    echo "Example: $(basename $0) --outputfile deploy-inventory.json"
     exit 1
 }
 
@@ -11,20 +13,22 @@ fi
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --file_name)
-            OUTPUT_FILENAME="$2"
-            [ -z "$FILES" ] && { echo "Error: --files <sbom-json-files-comma-separated> is required."; usage; }
-            shift 2
-            ;;
-        --cdxgen-args)
-            CDXGEN_ARGS="$2"
+        --output_file)
+            output_file="$2"
+            [ -z "$output_file" ] && { echo "Error: --outputfile <filename for the generated json> is required."; usage; }
             shift 2
             ;;
         --help)
             usage
             ;;
+        *)
+            echo "Unknown parameter passed: $1"
+            usage
+            ;;
     esac
 done
+
+export OUTPUT_FILENAME=$output_file 
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${SCRIPT_DIR}/constants.variables
