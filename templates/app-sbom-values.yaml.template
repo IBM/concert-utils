@@ -22,3 +22,12 @@ concert:
     - name: "${ENVIRONMANET_NAME_1}"
     - name: "${ENVIRONMANET_NAME_2}"
     - name: "${ENVIRONMANET_NAME_3}"
+    services:
+    - name: "${COMPONENT_NAME}_api"
+      type: "app_end_point"
+      endpoints: 
+      - "${COMPONENT_ENDPOINTS}"
+      properties:
+        network_exposure: "${NETWORK_EXPOSURE}"
+      reliant_by:
+      - "${COMPONENT_NAME}"
