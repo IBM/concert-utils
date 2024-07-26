@@ -14,9 +14,9 @@ fi
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --output_file)
-            output_file="$2"
-            [ -z "$output_file" ] && { echo "Error: --outputfile <filename for the generated json> is required."; usage; }
+        --outputfile)
+            outputfile="$2"
+            [ -z "$outputfile" ] && { echo "Error: --outputfile <filename for the generated json> is required."; usage; }
             shift 2
             ;;
         --help)
@@ -40,7 +40,7 @@ export IMAGE_URI="${IMAGE_PURL}@${IMAGE_DIGEST}"
 
 
 #echo "generating build inventory config ${OUTPUTDIR}/${outfile_name} "
-export OUTPUT_FILENAME=$output_file
+export OUTPUT_FILENAME=$outputfile
 CONCERT_DEF_CONFIG_FILE=deploy-${COMPONENT_NAME}-${BUILD_NUMBER}-config.yaml
 envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/deploy-sbom-values.yaml.template > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
 
