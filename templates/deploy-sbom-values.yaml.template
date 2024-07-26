@@ -3,9 +3,9 @@ concert:
   - component_name: "${COMPONENT_NAME}"
     output_file: "${OUTPUT_FILENAME}" # optional
     app_name: "${APP_NAME}"
-    number: "${BUILD_NUMBER}"
+    number: "${DEPLOYMENT_BUILD_NUMBER}"
     version: "${APP_VERSION}"
-    environment_target: "${ENVIRONMENT}"
+    environment_target: "${ENVIRONMENT_TARGET}"
     repository:
       name: "${DEPLOYMENT_REPO_NAME}"
       url: "${DEPLOYMENT_REPO_URL}"
