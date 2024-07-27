@@ -47,4 +47,5 @@ export CONCERT_APP_URN=${CONCERT_URN_PREFIX}:${APP_NAME}
 ###
 
 TOOLKIT_COMMAND="app-sbom --app-config /toolkit-data/${CONFIG_FILENAME}"
+echo "docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c ${TOOLKIT_COMMAND}"
 docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
