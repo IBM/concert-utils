@@ -1,10 +1,9 @@
 #!/bin/bash
 ### WORK IN PROGESS
 
-
 usage() {
-    echo "Usage: $(basename $0) --outputfile <filename for the generated json>"
-    echo "Example: $(basename $0) --outputfile deploy-inventory.json"
+    echo "Usage: $(basename $0) --outputdir <outputdirectory for generated files> --configfile <application-config-file>"
+    echo "Example: $(basename $0) --outputdir <outputdirectory for generated files> --configfile application-config.yaml"
     exit 1
 }
 
@@ -14,9 +13,14 @@ fi
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --outputfile)
-            outputfile="$2"
-            [ -z "$outputfile" ] && { echo "Error: --outputfile <filename for the generated json> is required."; usage; }
+        --configfile)
+            configfile="$2"
+            [ -z "$configfile" ] && { echo "Error:  --configfile <application-config-file> is required."; usage; }
+            shift 2
+            ;;
+        --outputdir)
+            outputdir="$2"
+            [ -z "$outputdir" ] && { echo "Error: --outputdir <outputdirectory for generated files>  is required."; usage; }
             shift 2
             ;;
         --help)
@@ -29,21 +33,6 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source ${SCRIPT_DIR}/constants.variables
-
-# generate deploy file
-#
-export TIMESTAMP_UTC=$(date -u "+%Y-%m-%dT%H:%M:%SZ")
-export IMAGE_PURL=$IMAGE_NAME:$IMAGE_TAG
-export IMAGE_URI="${IMAGE_PURL}@${IMAGE_DIGEST}"
-
-
-#echo "generating build inventory config ${OUTPUTDIR}/${outfile_name} "
-export OUTPUT_FILENAME=$outputfile
-CONCERT_DEF_CONFIG_FILE=deploy-${COMPONENT_NAME}-${BUILD_NUMBER}-config.yaml
-envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/deploy-sbom-values.yaml.template > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
-
-TOOLKIT_COMMAND="deploy-sbom --deploy-config /toolkit-data/${CONCERT_DEF_CONFIG_FILE}"
-docker run -it --rm -u $(id -u):$(id -g) -v ${OUTPUTDIR}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
+TOOLKIT_COMMAND="deploy-sbom --deploy-config /toolkit-data/${configfile}"
+docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
 
