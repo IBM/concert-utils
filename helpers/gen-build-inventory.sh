@@ -37,11 +37,6 @@ export CONFIG_FILENAME=$configfile
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${SCRIPT_DIR}/constants.variables
 
-config_outfile_name="${COMPONENT_NAME}-${BUILD_NUMBER}-built-assets.json"
-export OUTPUT_FILENAME=$outputfile
-CONCERT_DEF_CONFIG_FILE=build-${COMPONENT_NAME}-${BUILD_NUMBER}-config.yaml
-envsubst < ${SCRIPT_DIR}/${TEMPLATE_PATH}/build-sbom-values.yaml.template > ${OUTPUTDIR}/${CONCERT_DEF_CONFIG_FILE}
-
 TOOLKIT_COMMAND="build-sbom --build-config /toolkit-data/${CONCERT_DEF_CONFIG_FILE}"
 docker run -it --rm -u $(id -u):$(id -g) -v ${OUTPUTDIR}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
 
