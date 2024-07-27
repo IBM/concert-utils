@@ -15,12 +15,12 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         --configfile)
             configfile="$2"
-            [ -z "$configfile" ] && { echo "Error: --configfile <application-config-file> is required."; usage; }
+            [ -z "$configfile" ] && { echo "Error:  --configfile <application-config-file> is required."; usage; }
             shift 2
             ;;
         --outputdir)
             outputdir="$2"
-            [ -z "$outputdir" ] && { echo "Error: --configfile <application-config-file> is required."; usage; }
+            [ -z "$outputdir" ] && { echo "Error: --outputdir <outputdirectory for generated files>  is required."; usage; }
             shift 2
             ;;
         --help)
