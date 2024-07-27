@@ -23,7 +23,7 @@ concert:
     - name: "${ENVIRONMANET_NAME_2}"
     - name: "${ENVIRONMANET_NAME_3}"
     services:
-    - name: "${COMPONENT_NAME}_api"
+    - name: "${END_POINT_NAME}"
       type: "app_end_point"
       endpoints: 
       - "${COMPONENT_ENDPOINTS}"
