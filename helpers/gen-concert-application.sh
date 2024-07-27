@@ -2,8 +2,8 @@
 
 
 usage() {
-    echo "Usage: $(basename $0) --configfile <application-config-file>"
-    echo "Example: $(basename $0) --configfile application-config.yaml"
+    echo "Usage: $(basename $0) --outputdir <outputdirectory for generated files> --configfile <application-config-file>"
+    echo "Example: $(basename $0) --outputdir <outputdirectory for generated files> --configfile application-config.yaml"
     exit 1
 }
 
@@ -16,6 +16,11 @@ while [[ "$#" -gt 0 ]]; do
         --configfile)
             configfile="$2"
             [ -z "$configfile" ] && { echo "Error: --configfile <application-config-file> is required."; usage; }
+            shift 2
+            ;;
+        --outputdir)
+            outputdir="$2"
+            [ -z "$outputdir" ] && { echo "Error: --configfile <application-config-file> is required."; usage; }
             shift 2
             ;;
         --help)
@@ -42,4 +47,4 @@ export CONCERT_APP_URN=${CONCERT_URN_PREFIX}:${APP_NAME}
 ###
 
 TOOLKIT_COMMAND="app-sbom --app-config /toolkit-data/${CONFIG_FILENAME}"
-docker run -it --rm -u $(id -u):$(id -g) -v ${OUTPUTDIR}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
+docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
