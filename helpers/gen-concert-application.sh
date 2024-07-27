@@ -33,19 +33,10 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-
-export CONFIG_FILENAME=$configfile
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source ${SCRIPT_DIR}/constants.variables
-
-export TIMESTAMP_UTC=$(date -u "+%Y-%m-%dT%H:%M:%SZ")
-export CONCERT_APP_URN=${CONCERT_URN_PREFIX}:${APP_NAME}
-
 ###
 # upload build file
 ###
 
-TOOLKIT_COMMAND="app-sbom --app-config /toolkit-data/${CONFIG_FILENAME}"
+TOOLKIT_COMMAND="app-sbom --app-config /toolkit-data/${configfile}"
 echo "docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c ${TOOLKIT_COMMAND}"
 docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"

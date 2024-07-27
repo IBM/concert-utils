@@ -32,11 +32,7 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-export CONFIG_FILENAME=$configfile
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source ${SCRIPT_DIR}/constants.variables
-
-TOOLKIT_COMMAND="build-sbom --build-config /toolkit-data/${CONCERT_DEF_CONFIG_FILE}"
-docker run -it --rm -u $(id -u):$(id -g) -v ${OUTPUTDIR}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
+TOOLKIT_COMMAND="build-sbom --build-config /toolkit-data/${configfile}"
+docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
 
