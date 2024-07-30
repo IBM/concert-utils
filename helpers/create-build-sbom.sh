@@ -34,7 +34,7 @@ done
 
 if which docker >/dev/null; then
     dockerexe = docker 
-elifwhich podman >/dev/null; then
+eli fwhich podman >/dev/null; then
     dockerexe podman
 else
     echo "docker or podman are not installed need a container runtime environment"
