@@ -1,4 +1,5 @@
 #!/bin/bash
+### WORK IN PROGESS
 
 usage() {
     echo "Usage: $(basename $0) --outputdir <outputdirectory for generated files> --configfile <application-config-file>"
@@ -12,6 +13,11 @@ fi
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
+        --configfile)
+            configfile="$2"
+            [ -z "$configfile" ] && { echo "Error:  --configfile <application-config-file> is required."; usage; }
+            shift 2
+            ;;
         --outputdir)
             outputdir="$2"
             [ -z "$outputdir" ] && { echo "Error: --outputdir <outputdirectory for generated files>  is required."; usage; }
@@ -27,5 +33,15 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-CODE_SCAN_COMMAND="upload-concert"
-docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${CODE_SCAN_COMMAND}"
+if which docker >/dev/null; then
+    dockerexe=docker 
+elif which podman >/dev/null; then
+    dockerexe=podman
+else
+    echo "docker or podman are not installed need a container runtime environment"
+    exit -1
+fi
+
+TOOLKIT_COMMAND="deploy-sbom --deploy-config /toolkit-data/${configfile}"
+${dockerexe} run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
+
