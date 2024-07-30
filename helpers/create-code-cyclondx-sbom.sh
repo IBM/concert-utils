@@ -28,10 +28,19 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
+if which docker >/dev/null; then
+    dockerexe=docker 
+elif which podman >/dev/null; then
+    dockerexe=podman
+else
+    echo "docker or podman are not installed need a container runtime environment"
+    exit -1
+fi
+
 export OUTPUT_FILENAME=$outputfile 
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${SCRIPT_DIR}/constants.variables
 
 CODE_SCAN_COMMAND="code-scan --src /concert-sample --output-file ${OUTPUT_FILENAME} ${CDXGEN_ARGS}"
-docker run -it --rm -u $(id -u):$(id -g) -v ${SRC_PATH}:/concert-sample -v ${OUTPUTDIR}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${CODE_SCAN_COMMAND}"
+${dockerexe} run -it --rm -u $(id -u):$(id -g) -v ${SRC_PATH}:/concert-sample -v ${OUTPUTDIR}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${CODE_SCAN_COMMAND}"
