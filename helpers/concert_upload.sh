@@ -28,9 +28,9 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 if which docker >/dev/null; then
-    dockerexe = docker 
+    dockerexe=docker 
 elif which podman >/dev/null; then
-    dockerexe podman
+    dockerexe=podman
 else
     echo "docker or podman are not installed"
     exit -1
