@@ -27,5 +27,14 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
+if which docker >/dev/null; then
+    dockerexe = docker 
+elifwhich podman >/dev/null; then
+    dockerexe podman
+else
+    echo "docker or podman are not installed"
+    exit -1
+fi
+
 CODE_SCAN_COMMAND="upload-concert"
-docker run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${CODE_SCAN_COMMAND}"
+${dockerexe} run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${CODE_SCAN_COMMAND}"

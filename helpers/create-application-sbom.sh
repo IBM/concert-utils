@@ -33,6 +33,15 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
+if which docker >/dev/null; then
+    dockerexe = docker 
+elifwhich podman >/dev/null; then
+    dockerexe podman
+else
+    echo "docker or podman are not installed need a container runtime environment"
+    exit -1
+fi
+
 ###
 # upload build file
 ###
