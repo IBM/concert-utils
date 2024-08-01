@@ -53,5 +53,5 @@ else
     exit -1
 fi
 
-CODE_SCAN_COMMAND="upload-concert"
+CODE_SCAN_COMMAND="upload-concert --upload-config config.yaml"
 ${dockerexe} run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${CODE_SCAN_COMMAND}"
