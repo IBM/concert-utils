@@ -14,27 +14,27 @@ You can clone or fork the concert-util github project.    The utilities provided
 
 ### Create cocnert application sbom
 ```
-./concert-utils/helpers/gen-concert-application.sh --outputdir ${OUTPUTDIR} --configfile ${CONCERT_DEF_CONFIG_FILE}
+./concert-utils/helpers/create-application-sbom.sh --outputdir <> --configfile <>
 ```
 
 ### Create cocnert build sbom
 ```
-./concert-utils/helpers/gen-build-inventory.sh --outputdir ${OUTPUTDIR} --configfile ${CONCERT_DEF_CONFIG_FILE}
+./concert-utils/helpers/create-build-sbom.sh --outputdir <> --configfile <>
 ```
 
 ### Create cocnert deploy sbom
 ```
-./concert-utils/helpers/gen-deploy-inventory.sh --outputdir ${OUTPUTDIR} --configfile ${CONCERT_DEF_CONFIG_FILE}
+./concert-utils/helpers/create-deploy-sbom.sh --outputdir <> --configfile <>
 ```
 
 ### Create cyclongdx sbom
 ```
-./concert-utils/helpers/code-scan-stage-gen-cyclondx-sbom.sh --outputfile "${REPO_NAME}-cyclonedx-sbom-${BUILD_NUMBER}.json"
+./concert-utils/helpers/create-image-cyclondx-sbom.sh --outputfile "${REPO_NAME}-cyclonedx-sbom-${BUILD_NUMBER}.json"
 ```
 
 ### Uploade data to concert
 ```
-./concert-utils/helpers/concert_upload_data.sh --outputdir ${OUTPUTDIR}
+./concert-utils/helpers/concert_upload.sh --outputdir 
 ```
 
 ## Using the utilities
