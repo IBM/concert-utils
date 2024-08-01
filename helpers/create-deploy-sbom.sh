@@ -47,7 +47,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 if which docker >/dev/null; then
-    dockerexe=docker 
+    dockerexe=docker
 elif which podman >/dev/null; then
     dockerexe=podman
 else
@@ -56,5 +56,6 @@ else
 fi
 
 TOOLKIT_COMMAND="deploy-sbom --deploy-config /toolkit-data/${configfile}"
-${dockerexe} run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
+echo "${CONTAINER_COMMAND} ${OPTIONS} -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c ${TOOLKIT_COMMAND}"
+${CONTAINER_COMMAND} ${OPTIONS} -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
 
