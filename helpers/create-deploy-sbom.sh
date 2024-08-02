@@ -1,5 +1,18 @@
 #!/bin/bash
-### WORK IN PROGESS
+
+##########################################################################
+# Copyright IBM Corp. 2024.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+# an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+# specific language governing permissions and limitations under the License.
+##########################################################################
+
 
 usage() {
     echo "Usage: $(basename $0) --outputdir <outputdirectory for generated files> --configfile <application-config-file>"
@@ -34,7 +47,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 if which docker >/dev/null; then
-    dockerexe=docker 
+    dockerexe=docker
 elif which podman >/dev/null; then
     dockerexe=podman
 else
@@ -43,5 +56,6 @@ else
 fi
 
 TOOLKIT_COMMAND="deploy-sbom --deploy-config /toolkit-data/${configfile}"
-${dockerexe} run -it --rm -u $(id -u):$(id -g) -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
+echo "${CONTAINER_COMMAND} ${OPTIONS} -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c ${TOOLKIT_COMMAND}"
+${CONTAINER_COMMAND} ${OPTIONS} -v ${outputdir}:/toolkit-data ${CONCERT_TOOLKIT_IMAGE} bash -c "${TOOLKIT_COMMAND}"
 
